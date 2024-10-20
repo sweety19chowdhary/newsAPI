@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Search Results</h1>
-    <ul>
-        {% for article in articles %}
-            <li>
-                <a href="{{ article.url }}">{{ article.title }}</a>
-                <p>{{ article.description }}</p>
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="/">Back to search</a>
+    <div class="container">
+        <h1>Search Results</h1>
+
+        {% if articles and articles|length > 0 %}
+            <ul>
+                {% for article in articles %}
+                    <li>
+                        <a href="{{ article.url }}">{{ article.title }}</a>
+                        <p>Published on: {{ article.publishedAt }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No articles found for your search.</p>
+        {% endif %}
+        
+        <a href="/">Back to search</a>
+    </div>
 </body>
 </html>
